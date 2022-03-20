@@ -1,10 +1,11 @@
 const jwt = require("jsonwebtoken");
 const LoginModel = require("../model/Login");
+const TokenModel = require("../model/Tokens");
 
 class Auth {
   register = async (req, res, next) => {
     const user = {
-      username: "yolo55",
+      username: "yolo53",
       email: "b@example.com",
       password: "random",
     };
@@ -19,7 +20,9 @@ class Auth {
           const post = new LoginModel(user);
           const savedPost = await post.save();
 
-          jwt.sign({ user }, "secretkey", (err, token) => {
+          jwt.sign({ user }, "secretkey", async (err, token) => {
+            const usertoken = new TokenModel({ token });
+            const savedtoken = await usertoken.save();
             res.json({ token });
           });
         }
@@ -38,7 +41,9 @@ class Auth {
         if (docs.length > 0) {
           if (user.password == docs[0].password) {
             console.log("correct");
-            jwt.sign({ user }, "secretkey", (err, token) => {
+            jwt.sign({ user }, "secretkey", async (err, token) => {
+              const usertoken = new TokenModel({ token });
+              const savedtoken = await usertoken.save();
               res.json({
                 token,
               });
