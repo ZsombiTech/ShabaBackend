@@ -7,12 +7,19 @@ class Post {
       if (err) {
         res.sendStatus(403);
       } else {
-        const newpost = {
-          response: "Good",
-        };
-        /*const post = new PostModel(newpost);
-        const savedPost = await post.save();*/
-        res.json(newpost);
+        let dataa;
+
+        PostModel.find({}, (err, docs) => {
+          console.log(docs);
+          dataa = docs;
+
+          const newpost = {
+            response: "Good",
+            data: dataa,
+          };
+
+          res.json(newpost);
+        });
       }
     });
   };
