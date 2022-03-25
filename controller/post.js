@@ -8,16 +8,11 @@ class Post {
         res.sendStatus(403);
       } else {
         const newpost = {
-          username: "Ok",
-          description: "Szeee",
-          imageUrl: "www",
+          response: "Good",
         };
-        const post = new PostModel(newpost);
-        const savedPost = await post.save();
-        res.json({
-          message: "Post created...",
-          authData,
-        });
+        /*const post = new PostModel(newpost);
+        const savedPost = await post.save();*/
+        res.json(newpost);
       }
     });
   };

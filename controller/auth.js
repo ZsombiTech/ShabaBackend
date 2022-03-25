@@ -5,9 +5,9 @@ const TokenModel = require("../model/Tokens");
 class Auth {
   register = async (req, res, next) => {
     const user = {
-      username: "yolo53",
-      email: "b@example.com",
-      password: "random",
+      username: req.body.username,
+      email: req.body.email,
+      password: req.body.password,
     };
     LoginModel.find(
       { username: user.username },
@@ -32,10 +32,10 @@ class Auth {
 
   login = async (req, res, next) => {
     const user = {
-      username: "yolo2",
-      email: "b@example.com",
-      password: "random",
+      username: req.body.username,
+      password: req.body.password,
     };
+
     LoginModel.find({ username: user.username }, (err, docs) => {
       if (!err) {
         if (docs.length > 0) {
