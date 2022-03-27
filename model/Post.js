@@ -9,7 +9,10 @@ const PostSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  imageUrl: { type: String, required: true },
+  tags: {
+    type: String,
+  },
+  imageUrl: { type: String },
   date: {
     type: Date,
     default: Date.now,
