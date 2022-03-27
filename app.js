@@ -1,6 +1,7 @@
 const express = require("express");
 const authRoutes = require("./routes/auth");
 const postRoutes = require("./routes/posts");
+const getUsers = require("./routes/users");
 const tokenverify = require("./middleware/tokenverify");
 const connectdb = require("./config/database");
 const cors = require("cors");
@@ -18,5 +19,6 @@ app.get("/api", (req, res) => {
 app.use(express.json());
 app.use("/auth", authRoutes);
 app.use("/", tokenverify, postRoutes);
+app.use("/", tokenverify, getUsers);
 
 app.listen(8000);
