@@ -13,6 +13,9 @@ const LoginSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  description: {
+    type: String,
+  },
   date: {
     type: Date,
     default: Date.now,
