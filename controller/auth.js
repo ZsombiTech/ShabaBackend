@@ -15,7 +15,7 @@ class Auth {
       async (err, docs) => {
         if (docs.length > 0) {
           console.log("Already exits");
-          res.json("Already exits");
+          res.json({ response: "Already exits" });
         } else {
           const post = new LoginModel(user);
           const savedPost = await post.save();
@@ -45,16 +45,20 @@ class Auth {
               const usertoken = new TokenModel({ token });
               const savedtoken = await usertoken.save();
               res.json({
+                response: "correct",
                 token,
               });
             });
           } else {
+            res.json({ response: "Incorrect password" });
             console.log("incorrect");
           }
         } else {
+          res.json({ response: "No user with this username" });
           console.log("No user with this username");
         }
       } else {
+        res.json({ response: "Something went wrong" });
         console.log("failed");
       }
     });
