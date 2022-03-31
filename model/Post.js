@@ -12,7 +12,7 @@ const PostSchema = mongoose.Schema({
   tags: {
     type: String,
   },
-  imageUrl: { type: String },
+  url: { type: String },
   date: {
     type: Date,
     default: Date.now,

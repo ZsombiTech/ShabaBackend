@@ -34,10 +34,12 @@ class User {
   };
   postUser = async (req, res, next) => {
     jwt.verify(req.token, "secretkey", async (err, authData) => {
+      console.log(req.body.url);
       const postt = {
         username: req.body.username,
         description: req.body.description,
         tags: req.body.tags,
+        url: req.body.url,
       };
 
       const post = new PostModel(postt);
