@@ -5,7 +5,10 @@ const userController = require("../controller/user");
 
 const User = new userController();
 
-router.get("/users:username", User.getUser);
+router.post("/setdesc", User.setDesc);
+
 router.post("/userpost", User.postUser);
+
+router.get("/users:username", User.getUser);
 
 module.exports = router;

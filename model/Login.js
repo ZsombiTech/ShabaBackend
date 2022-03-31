@@ -15,6 +15,7 @@ const LoginSchema = mongoose.Schema({
   },
   description: {
     type: String,
+    default: "Write a bio here...",
   },
   date: {
     type: Date,

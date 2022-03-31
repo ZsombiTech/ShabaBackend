@@ -3,6 +3,26 @@ const LoginModel = require("../model/Login");
 const PostModel = require("../model/Post");
 
 class User {
+  setDesc = async (req, res, next) => {
+    console.log("lefut");
+    jwt.verify(req.token, "secretkey", async (err, authData) => {
+      const description = req.body.description;
+      const id = req.body.id;
+      console.log("lefut2");
+      LoginModel.findByIdAndUpdate(
+        id,
+        { description: description },
+        function (err, docs) {
+          if (err) {
+            console.log(err);
+          } else {
+            res.json("success");
+            console.log("Updated User : ", docs);
+          }
+        }
+      );
+    });
+  };
   getUser = async (req, res, next) => {
     jwt.verify(req.token, "secretkey", async (err, authData) => {
       const username = req.params.username.substring(1);
