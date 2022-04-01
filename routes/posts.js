@@ -7,4 +7,6 @@ const Post = new postController();
 
 router.post("/posts", Post.post);
 
+router.post("/findpost:projectname", Post.findpost);
+
 module.exports = router;

@@ -23,6 +23,11 @@ class Post {
       }
     });
   };
+  findpost = async (req, res, next) => {
+    jwt.verify(req.token, "secretkey", async (err, authData) => {
+      const projectname = req.params.projectname.substring(1);
+    });
+  };
 }
 
 module.exports = Post;
