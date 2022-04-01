@@ -8,7 +8,6 @@ class User {
     jwt.verify(req.token, "secretkey", async (err, authData) => {
       const description = req.body.description;
       const id = req.body.id;
-      console.log("lefut2");
       LoginModel.findByIdAndUpdate(
         id,
         { description: description },
@@ -17,7 +16,6 @@ class User {
             console.log(err);
           } else {
             res.json("success");
-            console.log("Updated User : ", docs);
           }
         }
       );
