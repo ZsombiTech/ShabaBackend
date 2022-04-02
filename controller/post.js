@@ -38,36 +38,50 @@ class Post {
       const clicked = req.body.clicked;
       const first = req.body.first;
       const username = req.body.username;
+      const numm = req.body.numm;
 
       let add = 0;
-      if (clicked) {
-        add = 1;
-      } else if (!first) {
-        add = -1;
+
+      if (!first) {
+        if (clicked) {
+          add = 1;
+        } else {
+          add = -1;
+        }
       }
 
-      PostModel.find({ _id: id }, "likes", (err, docs) => {
+      PostModel.find({ _id: id }, "likes likedBy", (err, docs) => {
         PostModel.findByIdAndUpdate(
           id,
           { likes: docs[0].likes + add },
-          function (err, docs) {
+          function (err, docss) {
             if (err) {
               console.log(err);
             } else {
               if (add == 1) {
-                PostModel.findByIdAndUpdate(
-                  id,
-                  {
-                    $push: { likedBy: username },
-                  },
-                  function (error, success) {
-                    if (error) {
-                      console.log(error);
-                    } else {
-                      console.log("success add");
-                    }
+                let exits = false;
+
+                docs[0].likedBy.map((item) => {
+                  if (item == username) {
+                    exits = true;
                   }
-                );
+                });
+
+                if (!exits) {
+                  PostModel.findByIdAndUpdate(
+                    id,
+                    {
+                      $push: { likedBy: username },
+                    },
+                    function (error, success) {
+                      if (error) {
+                        console.log(error);
+                      } else {
+                        console.log("success add");
+                      }
+                    }
+                  );
+                }
               }
               if (add == -1) {
                 PostModel.findByIdAndUpdate(
