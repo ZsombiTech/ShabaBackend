@@ -11,4 +11,6 @@ router.get("/findpost:projectname", Post.findpost);
 
 router.post("/likepost", Post.likepost);
 
+router.get("/ownposts:username", Post.ownposts);
+
 module.exports = router;

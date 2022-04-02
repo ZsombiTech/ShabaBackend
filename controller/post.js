@@ -32,6 +32,17 @@ class Post {
       });
     });
   };
+  ownposts = async (req, res, next) => {
+    jwt.verify(req.token, "secretkey", async (err, authData) => {
+      const username = req.params.username.substring(1);
+
+      console.log(username);
+
+      PostModel.find({ username: username }, (err, docs) => {
+        res.json(docs);
+      });
+    });
+  };
   likepost = async (req, res, next) => {
     jwt.verify(req.token, "secretkey", async (err, authData) => {
       const id = req.body.id;
