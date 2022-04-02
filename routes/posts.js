@@ -9,4 +9,6 @@ router.post("/posts", Post.post);
 
 router.get("/findpost:projectname", Post.findpost);
 
+router.post("/likepost:projectname", Post.likepost);
+
 module.exports = router;

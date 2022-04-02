@@ -12,6 +12,10 @@ const PostSchema = mongoose.Schema({
   tags: {
     type: String,
   },
+  likes: {
+    type: Number,
+    default: 0,
+  },
   url: { type: String },
   date: {
     type: Date,
