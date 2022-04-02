@@ -34,10 +34,10 @@ class Post {
   };
   likepost = async (req, res, next) => {
     jwt.verify(req.token, "secretkey", async (err, authData) => {
-      const projectname = req.params.projectname.substring(1);
       const id = req.body.id;
       const clicked = req.body.clicked;
       const first = req.body.first;
+      const username = req.body.username;
 
       let add = 0;
       if (clicked) {
@@ -54,6 +54,36 @@ class Post {
             if (err) {
               console.log(err);
             } else {
+              if (add == 1) {
+                PostModel.findByIdAndUpdate(
+                  id,
+                  {
+                    $push: { likedBy: username },
+                  },
+                  function (error, success) {
+                    if (error) {
+                      console.log(error);
+                    } else {
+                      console.log("success add");
+                    }
+                  }
+                );
+              }
+              if (add == -1) {
+                PostModel.findByIdAndUpdate(
+                  id,
+                  {
+                    $pull: { likedBy: username },
+                  },
+                  function (error, success) {
+                    if (error) {
+                      console.log(error);
+                    } else {
+                      console.log("success add");
+                    }
+                  }
+                );
+              }
               console.log("success");
               console.log(clicked);
               console.log(add);
