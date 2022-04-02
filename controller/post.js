@@ -36,10 +36,21 @@ class Post {
     jwt.verify(req.token, "secretkey", async (err, authData) => {
       const username = req.params.username.substring(1);
 
-      console.log(username);
-
       PostModel.find({ username: username }, (err, docs) => {
         res.json(docs);
+      });
+    });
+  };
+  deletepost = async (req, res, next) => {
+    jwt.verify(req.token, "secretkey", async (err, authData) => {
+      const id = req.body.id;
+      console.log(id);
+      PostModel.findByIdAndRemove(id, function (err, docs) {
+        if (err) {
+          console.log(err);
+        } else {
+          res.json("success");
+        }
       });
     });
   };

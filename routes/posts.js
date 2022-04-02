@@ -13,4 +13,6 @@ router.post("/likepost", Post.likepost);
 
 router.get("/ownposts:username", Post.ownposts);
 
+router.post("/deletepost", Post.deletepost);
+
 module.exports = router;
