@@ -5,13 +5,15 @@ const PostSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  title: {
+    type: String,
+    required: true,
+  },
   description: {
     type: String,
     required: true,
   },
-  tags: {
-    type: String,
-  },
+  tags: [String],
   likes: {
     type: Number,
     default: 0,

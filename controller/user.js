@@ -32,10 +32,14 @@ class User {
   };
   postUser = async (req, res, next) => {
     jwt.verify(req.token, "secretkey", async (err, authData) => {
+      const tags = req.body.tags.replace(/\s/g, "");
+      const nowhitetags = tags.split(",");
+
       const postt = {
         username: req.body.username,
+        title: req.body.title,
         description: req.body.description,
-        tags: req.body.tags,
+        tags: nowhitetags,
         url: req.body.url,
       };
 
