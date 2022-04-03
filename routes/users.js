@@ -5,6 +5,8 @@ const userController = require("../controller/user");
 
 const User = new userController();
 
+router.post("/searchword", User.searchword);
+
 router.post("/setdesc", User.setDesc);
 
 router.post("/userpost", User.postUser);

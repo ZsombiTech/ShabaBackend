@@ -14,12 +14,10 @@ class Auth {
       "username",
       async (err, docs) => {
         if (docs.length > 0) {
-          console.log("Already exits");
           res.json({ response: "Already exits" });
         } else {
           const post = new LoginModel(user);
           const savedPost = await post.save();
-
           jwt.sign({ user }, "secretkey", async (err, token) => {
             const usertoken = new TokenModel({ token });
             const savedtoken = await usertoken.save();
@@ -40,7 +38,6 @@ class Auth {
       if (!err) {
         if (docs.length > 0) {
           if (user.password == docs[0].password) {
-            console.log("correct");
             jwt.sign({ user }, "secretkey", async (err, token) => {
               const usertoken = new TokenModel({ token });
               const savedtoken = await usertoken.save();
@@ -51,15 +48,12 @@ class Auth {
             });
           } else {
             res.json({ response: "Incorrect password" });
-            console.log("incorrect");
           }
         } else {
           res.json({ response: "No user with this username" });
-          console.log("No user with this username");
         }
       } else {
         res.json({ response: "Something went wrong" });
-        console.log("failed");
       }
     });
   };

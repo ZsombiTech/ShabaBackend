@@ -10,7 +10,6 @@ class Post {
         let dataa;
 
         PostModel.find({}, (err, docs) => {
-          console.log(docs);
           dataa = docs;
 
           const newpost = {
@@ -27,7 +26,7 @@ class Post {
     jwt.verify(req.token, "secretkey", async (err, authData) => {
       const projectname = req.params.projectname.substring(1);
 
-      PostModel.find({ description: projectname }, (err, docs) => {
+      PostModel.find({ title: projectname }, (err, docs) => {
         res.json(docs);
       });
     });
@@ -44,7 +43,6 @@ class Post {
   deletepost = async (req, res, next) => {
     jwt.verify(req.token, "secretkey", async (err, authData) => {
       const id = req.body.id;
-      console.log(id);
       PostModel.findByIdAndRemove(id, function (err, docs) {
         if (err) {
           console.log(err);
@@ -120,9 +118,7 @@ class Post {
                   }
                 );
               }
-              console.log("success");
-              console.log(clicked);
-              console.log(add);
+
               res.json("success");
             }
           }

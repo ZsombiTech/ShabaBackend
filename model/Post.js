@@ -9,7 +9,11 @@ const PostSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  description: {
+  shortdescription: {
+    type: String,
+    required: true,
+  },
+  longdescription: {
     type: String,
     required: true,
   },
@@ -20,6 +24,10 @@ const PostSchema = mongoose.Schema({
   },
   likedBy: [String],
   url: { type: String },
+  private: {
+    type: Boolean,
+    required: true,
+  },
   date: {
     type: Date,
     default: Date.now,

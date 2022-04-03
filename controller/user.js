@@ -4,7 +4,6 @@ const PostModel = require("../model/Post");
 
 class User {
   setDesc = async (req, res, next) => {
-    console.log("lefut");
     jwt.verify(req.token, "secretkey", async (err, authData) => {
       const description = req.body.description;
       const id = req.body.id;
@@ -21,6 +20,7 @@ class User {
       );
     });
   };
+
   getUser = async (req, res, next) => {
     jwt.verify(req.token, "secretkey", async (err, authData) => {
       const username = req.params.username.substring(1);
@@ -30,6 +30,17 @@ class User {
       });
     });
   };
+
+  searchword = async (req, res, next) => {
+    jwt.verify(req.token, "secretkey", async (err, authData) => {
+      const word = req.body.word;
+
+      PostModel.find({ tags: word }, (err, docs) => {
+        res.json(docs);
+      });
+    });
+  };
+
   postUser = async (req, res, next) => {
     jwt.verify(req.token, "secretkey", async (err, authData) => {
       const tags = req.body.tags.replace(/\s/g, "");
@@ -38,9 +49,11 @@ class User {
       const postt = {
         username: req.body.username,
         title: req.body.title,
-        description: req.body.description,
+        shortdescription: req.body.shortdescription,
+        longdescription: req.body.longdescription,
         tags: nowhitetags,
         url: req.body.url,
+        private: req.body.private,
       };
 
       const post = new PostModel(postt);
