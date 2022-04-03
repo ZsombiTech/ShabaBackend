@@ -13,6 +13,7 @@ app.use(cors());
 connectdb();
 
 app.get("/api", (req, res) => {
+  console.log("Database_URL", process.env.DATABASE_URL);
   res.json("welcome");
 });
 
