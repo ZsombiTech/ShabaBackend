@@ -21,4 +21,4 @@ app.use("/auth", authRoutes);
 app.use("/", tokenverify, postRoutes);
 app.use("/", tokenverify, getUsers);
 
-app.listen(8000);
+app.listen(process.env.PORT || 8000);
