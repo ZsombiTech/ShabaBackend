@@ -5,6 +5,14 @@ const getUsers = require("./routes/users");
 const tokenverify = require("./middleware/tokenverify");
 const connectdb = require("./config/database");
 const cors = require("cors");
+const rateLimit = require("express-rate-limit");
+
+const limiter = rateLimit({
+  windowMs: 30 * 60 * 1000,
+  max: 19,
+  standardHeaders: true,
+  legacyHeaders: false,
+});
 
 const app = express();
 
@@ -15,6 +23,7 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
+app.use(limiter);
 
 connectdb();
 
