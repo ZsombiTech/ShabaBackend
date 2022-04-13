@@ -17,7 +17,7 @@ const limiter = rateLimit({
 const app = express();
 
 const corsOptions = {
-  origin: "https://tothambrus11.github.io/zsombi-frontend/",
+  origin: "https://tothambrus11.github.io/",
   credentials: true, //access-control-allow-credentials:true
   optionSuccessStatus: 200,
 };
